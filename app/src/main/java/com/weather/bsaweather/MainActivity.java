@@ -1,5 +1,6 @@
 package com.weather.bsaweather;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,11 +34,15 @@ public class MainActivity extends AppCompatActivity implements IWeatherView {
 
     private WeatherPresenter mWeatherPresenter;
 
+    private WeatherForecast mForecast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        mWeatherPresenter.getCurrentWeather("London");
+        mWeatherPresenter.getForecastWeather("London");
     }
 
     @Override
@@ -90,6 +95,14 @@ public class MainActivity extends AppCompatActivity implements IWeatherView {
                 .VERTICAL));
         mRecyclerAdapter = new RecyclerAdapter(MainActivity.this);
         mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerAdapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, WeatherForecast.ListBean listBean) {
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                intent.putExtra("ser", listBean);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

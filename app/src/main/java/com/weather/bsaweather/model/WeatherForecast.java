@@ -1,10 +1,13 @@
 package com.weather.bsaweather.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class WeatherForecast {
+public class WeatherForecast implements Serializable{
 
     /**
      * cod : 200
@@ -182,6 +185,8 @@ public class WeatherForecast {
      * "country":"TW","population":7871900}
      */
 
+    private static final long serialVersionUID=1L;
+
     private String cod;
     private double message;
     private int cnt;
@@ -221,6 +226,9 @@ public class WeatherForecast {
     }
 
     public List<ListBean> getList() {
+//        for (int i = 0; i < list.size(); i ++){
+//            Log.d("fengjw", list.toString());
+//        }
         return list;
     }
 
@@ -228,7 +236,7 @@ public class WeatherForecast {
         this.list = list;
     }
 
-    public static class CityBean {
+    public static class CityBean implements Serializable{
         /**
          * id : 1668341
          * name : Taipei
@@ -236,6 +244,8 @@ public class WeatherForecast {
          * country : TW
          * population : 7871900
          */
+
+        private static final long serialVersionUID=1L;
 
         private int id;
         private String name;
@@ -283,11 +293,13 @@ public class WeatherForecast {
             this.population = population;
         }
 
-        public static class CoordBean {
+        public static class CoordBean implements Serializable{
             /**
              * lat : 25.0375
              * lon : 121.5637
              */
+
+            private static final long serialVersionUID=1L;
 
             private double lat;
             private double lon;
@@ -310,7 +322,7 @@ public class WeatherForecast {
         }
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * dt : 1529053200
          * main : {"temp":298.39,"temp_min":298.39,"temp_max":298.624,"pressure":1007.98,
@@ -322,6 +334,8 @@ public class WeatherForecast {
          * sys : {"pod":"d"}
          * dt_txt : 2018-06-15 09:00:00
          */
+
+        private static final long serialVersionUID=1L;
 
         private int dt;
         private MainBean main;
@@ -396,7 +410,7 @@ public class WeatherForecast {
             this.weather = weather;
         }
 
-        public static class MainBean {
+        public static class MainBean implements Serializable{
             /**
              * temp : 298.39
              * temp_min : 298.39
@@ -407,6 +421,8 @@ public class WeatherForecast {
              * humidity : 100
              * temp_kf : -0.24
              */
+
+            private static final long serialVersionUID=1L;
 
             private double temp;
             private double temp_min;
@@ -482,10 +498,12 @@ public class WeatherForecast {
             }
         }
 
-        public static class CloudsBean {
+        public static class CloudsBean implements Serializable{
             /**
              * all : 92
              */
+
+            private static final long serialVersionUID=1L;
 
             private int all;
 
@@ -498,11 +516,13 @@ public class WeatherForecast {
             }
         }
 
-        public static class WindBean {
+        public static class WindBean implements Serializable{
             /**
              * speed : 5.86
              * deg : 38.0007
              */
+
+            private static final long serialVersionUID=1L;
 
             private double speed;
             private double deg;
@@ -524,10 +544,12 @@ public class WeatherForecast {
             }
         }
 
-        public static class RainBean {
+        public static class RainBean implements Serializable{
             /**
              * 3h : 0.125
              */
+
+            private static final long serialVersionUID=1L;
 
             @SerializedName("3h")
             private double _$3h;
@@ -541,10 +563,12 @@ public class WeatherForecast {
             }
         }
 
-        public static class SysBean {
+        public static class SysBean implements Serializable{
             /**
              * pod : d
              */
+
+            private static final long serialVersionUID=1L;
 
             private String pod;
 
@@ -557,13 +581,15 @@ public class WeatherForecast {
             }
         }
 
-        public static class WeatherBean {
+        public static class WeatherBean implements Serializable{
             /**
              * id : 500
              * main : Rain
              * description : light rain
              * icon : 10d
              */
+
+            private static final long serialVersionUID=1L;
 
             private int id;
             private String main;

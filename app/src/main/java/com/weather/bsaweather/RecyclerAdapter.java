@@ -16,10 +16,28 @@ import com.weather.bsaweather.utils.Constants;
  * Created by fengjw on 2018/6/27.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder> implements View.OnClickListener{
 
     private Context mContext;
     private WeatherForecast mForecast;
+
+    private OnItemClickListener mOnItemClickListener = null;
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null){
+            mOnItemClickListener.onItemClick(v, mForecast.getList().get((int)v.getTag()));
+        }
+    }
+
+    public static interface OnItemClickListener{
+        void onItemClick(View view,WeatherForecast.ListBean listBean);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.mOnItemClickListener = listener;
+    }
+
 
     public RecyclerAdapter(Context context) {
         mContext = context;
@@ -43,6 +61,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
     public RecyclerAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
                 .recycler_item, parent, false);
+        view.setOnClickListener(this);
         return new ItemViewHolder(view);
     }
 
@@ -55,6 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         Glide.with(mContext).load(Constants.ICON_URL + mForecast.getList().get(position).getWeather
                 ().get(0).getIcon() + ".png").error(Glide.with(mContext).load(R.drawable
                 .ic_thumb_down_black_120dp)).into(holder.mIvWeather);
+        holder.itemView.setTag(position);
     }
 
     @Override
